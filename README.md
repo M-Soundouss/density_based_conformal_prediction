@@ -6,6 +6,3 @@ Environment : Python 3.6 with Keras, Tensorflow, ands libraries numpy, pandas, s
 
 Note : The representations are not deterministic, so it may not have the same results as in the paper,
 but the idea and the tendencies remain the same.
-=======
-but the idea and the tendencies remain the same.
->>>>>>> origin/master

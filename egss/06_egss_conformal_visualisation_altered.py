@@ -9,10 +9,10 @@ from egss.egss_mlp_functions import kde2D_visualisation
 
 
 # Read training and testing data
-df_train = pd.read_json("EGSS_MLP_train_results.json")
-df_outliers = pd.read_json("EGSS_MLP_outliers_results.json")
-df_noisy = pd.read_json("EGSS_MLP_noisy_results.json")
-df_clean = pd.read_json("EGSS_MLP_clean_results.json")
+df_train = pd.read_json("json\\egss_train_results.json")
+df_outliers = pd.read_json("json\\egss_outliers_results.json")
+df_noisy = pd.read_json("json\\egss_noisy_results.json")
+df_clean = pd.read_json("json\\egss_clean_results.json")
 
 label_train = df_train["label"]
 X_train = df_train["repr"]
@@ -57,7 +57,7 @@ for i in classes:
     X_val_class = X_val[label_val == i, :]
     # alter next line command with X_clean/X_outliers/X_noisy and label_clean/label_outliers/label_noisy
     # (!!! keep X_noisy_class)
-    X_noisy_class = X_noisy[label_noisy == i, :]
+    X_noisy_class = X_outliers[label_outliers == i, :]
 
     feature_train_1 = X_train_class[:, 0]
     feature_train_2 = X_train_class[:, 1]
@@ -109,9 +109,9 @@ plt.ylim(-6, 6)
 
 plt.xlabel("Principal Component 1")
 plt.ylabel("Principal Component 2")
-# alter next line command with Original/Outlier/Noise in the title
-title = 'EGSS Noise : ' + r'$\epsilon$' + ' = 0.1'
+# alter next line command with Original/Outliers/Noise in the title
+title = 'EGSS Outliers : ' + r'$\epsilon$' + ' = 0.1'
 plt.title(title)
-# alter next line command with clean/outlier/noise in the file name
-plt.savefig('egss_density_noisy_eng.eps', format='eps')
+# alter next line command with clean/outlier/noisy in the file name
+plt.savefig('egss_density_outlier_eng.eps', format='eps')
 plt.close()

@@ -8,9 +8,9 @@ from celeba.celeba_cnn_functions import kde2D_visualisation
 
 
 # Read training and testing data
-df_train = pd.read_json("train_pred.json")
-df_val = pd.read_json("val_pred.json")
-df_test = pd.read_json("test_pred.json")
+df_train = pd.read_json("json\\celeba_train_pred.json")
+df_val = pd.read_json("json\\celeba_val_pred.json")
+df_test = pd.read_json("json\\celeba_test_pred.json")
 
 label_train = df_train["label"]
 label_val = df_val["label"]

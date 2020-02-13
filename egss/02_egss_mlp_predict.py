@@ -4,9 +4,16 @@ import pandas as pd
 from keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLROnPlateau
 from sklearn.model_selection import train_test_split
 from egss.egss_mlp_functions import  get_model
+import os, shutil
 
 
 if __name__ == "__main__":
+    output_path = "json"
+    if os.path.exists(output_path):
+        shutil.rmtree(output_path)
+
+    if not os.path.exists(output_path):
+        os.makedirs(output_path)
 
     data = pd.read_csv("datasets\\EGSS\\Data_for_UCI_named.csv", header=0)
 
@@ -52,7 +59,7 @@ if __name__ == "__main__":
         mlp_repr.append(repr_train[i])
 
     df = pd.DataFrame({"preds": mlp_preds, "repr": mlp_repr, "label": train_label})
-    df.to_json("EGSS_MLP_train_results.json", orient='records')
+    df.to_json(output_path + "\\egss_train_results.json", orient='records')
 
     pred = model.predict(test_data)
     pr, repr = repr_model.predict(test_data)
@@ -64,7 +71,7 @@ if __name__ == "__main__":
         mlp_repr.append(repr[i])
 
     df = pd.DataFrame({"preds": mlp_preds, "repr": mlp_repr, "label": test_label})
-    df.to_json("EGSS_MLP_test_results.json", orient='records')
+    df.to_json(output_path + "\\egss_test_results.json", orient='records')
 
     pred = model.predict(val_data)
     pr, repr = repr_model.predict(val_data)
@@ -76,7 +83,7 @@ if __name__ == "__main__":
         mlp_repr.append(repr[i])
 
     df = pd.DataFrame({"preds": mlp_preds, "repr": mlp_repr, "label": val_label})
-    df.to_json("EGSS_MLP_val_results.json", orient='records')
+    df.to_json(output_path + "\\egss_val_results.json", orient='records')
 
 
 

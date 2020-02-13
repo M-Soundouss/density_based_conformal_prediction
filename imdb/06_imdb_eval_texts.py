@@ -1,19 +1,15 @@
 # https://stackoverflow.com/questions/41577705/how-does-2d-kernel-density-estimation-in-python-sklearn-work
 import numpy as np
 import pandas as pd
-from sklearn.neighbors import KernelDensity
-import cv2
-import numpy as np
-import pandas as pd
 from sklearn.model_selection import train_test_split
 from imdb.imdb_nlp_functions import kde2D, kde2D_scores, kde2D_pred
 import json
 
 
-df_train = pd.read_json("IMDb_NLP_train_results.json")
-df_clean = pd.read_json("IMDb_NLP_clean_results.json")
-df_noisy = pd.read_json("IMDb_NLP_noisy_results.json")
-df_outlier = pd.read_json("IMDb_NLP_outlier_results.json")
+df_train = pd.read_json("json\\imdb_train_results.json")
+df_clean = pd.read_json("json\\imdb_clean_results.json")
+df_noisy = pd.read_json("json\\imdb_noisy_results.json")
+df_outlier = pd.read_json("json\\imdb_outlier_results.json")
 
 label_train = df_train["label"]
 X_train = df_train["repr"]
@@ -91,24 +87,24 @@ print(saved_elmts)
 
 df_clean["c_pred"] = clean_pred.values()
 df_clean = df_clean.drop("repr", axis=1)
-df_clean.ix[saved_elmts].to_json('clean_cpred_imdb.json', orient='records')
+df_clean.ix[saved_elmts].to_json('json\\imdb_clean_cpred_imdb.json', orient='records')
 
 df_noisy["c_pred"] = noisy_pred.values()
 df_noisy = df_noisy.drop("repr", axis=1)
-df_noisy.ix[saved_elmts].to_json('noisy_cpred_imdb.json', orient='records')
+df_noisy.ix[saved_elmts].to_json('json\\imdb_noisy_cpred_imdb.json', orient='records')
 
 df_outlier["c_pred"] = outlier_pred.values()
 df_outlier = df_outlier.drop("repr", axis=1)
-df_outlier.ix[saved_elmts].to_json('outlier_cpred_imdb.json', orient='records')
+df_outlier.ix[saved_elmts].to_json('json\\imdb_outlier_cpred_imdb.json', orient='records')
 
-file = "clean_cpred_imdb.json"
+file = "json\\imdb_clean_cpred_imdb.json"
 data = json.load(open(file, 'r'))
 json.dump(data, open(file, 'w'), indent=4)
 
-file = "outlier_cpred_imdb.json"
+file = "json\\imdb_outlier_cpred_imdb.json"
 data = json.load(open(file, 'r'))
 json.dump(data, open(file, 'w'), indent=4)
 
-file = "noisy_cpred_imdb.json"
+file = "json\\imdb_noisy_cpred_imdb.json"
 data = json.load(open(file, 'r'))
 json.dump(data, open(file, 'w'), indent=4)

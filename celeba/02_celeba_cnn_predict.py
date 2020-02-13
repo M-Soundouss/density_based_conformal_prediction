@@ -18,8 +18,8 @@ if __name__ == "__main__":
     file_path = "gender.h5"
 
     # change output file name and folder path depending on the images you want to predict
-    out_name = "outlier_images_pred.json"
-    list_paths = glob("data\\outlier_images\\*.jpg")
+    out_name = "json\\celeba_noisy_images_pred.json"
+    list_paths = glob("data\\noisy_images\\*.jpg")
 
     model, repr_model = get_model(n_classes=1)
 

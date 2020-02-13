@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 from imdb.imdb_nlp_functions import prepare_data_visualisation, kde2D_visualisation
 
 # Read training and testing data
-df_train = pd.read_json("IMDb_NLP_train_results.json")
-df_test = pd.read_json("IMDb_NLP_test_results.json")
+df_train = pd.read_json("json\\imdb_train_results.json")
+df_test = pd.read_json("json\\imdb_test_results.json")
 
 X_train, label_train, X_val, label_val, X_test, label_test, inertie = prepare_data_visualisation(df_train, df_test)
 

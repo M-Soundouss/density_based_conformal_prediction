@@ -7,9 +7,9 @@ from sklearn.model_selection import train_test_split
 from egss.egss_mlp_functions import cp_plots, calculate_accuracy, kde2D, kde2D_pred, kde2D_scores
 
 # Read training and testing data
-df_train = pd.read_json("EGSS_MLP_train_results.json")
-df_test = pd.read_json("EGSS_MLP_test_results.json")
-df_val = pd.read_json("EGSS_MLP_val_results.json")
+df_train = pd.read_json("json\\egss_train_results.json")
+df_test = pd.read_json("json\\egss_test_results.json")
+df_val = pd.read_json("json\\egss_val_results.json")
 
 df_train["preds"] = df_train["preds"].apply(lambda x: 0 if x <= 0.5 else 1)
 df_test["preds"] = df_test["preds"].apply(lambda x: 0 if x <= 0.5 else 1)
@@ -84,7 +84,7 @@ alphas_results_df = pd.DataFrame.from_dict(
     columns=["CNN Accuracy", "Valid Conformal Prediction Accuracy", "Valid CNN Accuracy",
              "Conformal Accuracy With {0,1}", "Null Percentage", "{0,1} Percentage"])
 print(alphas_results_df)
-alphas_results_df.to_json('egss_alphas_results.json')
-df_results = pd.read_json("egss_alphas_results.json", convert_axes=False)
+alphas_results_df.to_json("json\\egss_alphas_results.json")
+df_results = pd.read_json("json\\egss_alphas_results.json", convert_axes=False)
 
 cp_plots(df_results, "EGSS", "MLP")

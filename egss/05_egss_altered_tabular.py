@@ -74,7 +74,7 @@ for i in range(len(pred_noisy)):
     mlp_repr_noisy.append(repr_noisy[i])
 
 df = pd.DataFrame({"preds": mlp_preds_noisy, "repr": mlp_repr_noisy, "label": test_label})
-df.to_json("EGSS_MLP_noisy_results.json", orient='records')
+df.to_json("json\\egss_noisy_results.json", orient='records')
 
 
 X_outliers = (X_outliers - X.mean()) / X.std()
@@ -89,7 +89,7 @@ for i in range(len(pred_noisy)):
     mlp_repr_noisy.append(repr_noisy[i])
 
 df = pd.DataFrame({"preds": mlp_preds_noisy, "repr": mlp_repr_noisy, "label": Y_outliers})
-df.to_json("EGSS_MLP_outliers_results.json", orient='records')
+df.to_json("json\\egss_outliers_results.json", orient='records')
 
 test_data = (test_data - X.mean()) / X.std()
 
@@ -103,5 +103,5 @@ for i in range(len(pred_noisy)):
     mlp_repr_noisy.append(repr_noisy[i])
 
 df = pd.DataFrame({"preds": mlp_preds_noisy, "repr": mlp_repr_noisy, "label": test_label})
-df.to_json("EGSS_MLP_clean_results.json", orient='records')
+df.to_json("json\\egss_clean_results.json", orient='records')
 

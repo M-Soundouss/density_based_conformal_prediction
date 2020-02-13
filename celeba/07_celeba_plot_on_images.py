@@ -8,8 +8,8 @@ import matplotlib.image as mpimg
 
 
 # to do for each folder in clean/internet/masked/noisy/outlier
-output_path = "c_clean_images"
-df_test = pd.read_json("clean_cpred.json")
+output_path = "c_images\\c_outlier_images"
+df_test = pd.read_json("json\\celeba_outlier_cpred.json")
 
 test_cpred = np.array(df_test["c_pred"].tolist())
 test_pred = np.array(df_test["preds"].tolist())

@@ -5,9 +5,9 @@ from sklearn.metrics import accuracy_score
 from celeba.celeba_cnn_functions import cp_plots, calculate_accuracy, kde2D, kde2D_pred, kde2D_scores
 
 
-df_train = pd.read_json("train_pred.json")
-df_val = pd.read_json("val_pred.json")
-df_test = pd.read_json("test_pred.json")
+df_train = pd.read_json("json\\celeba_train_pred.json")
+df_val = pd.read_json("json\\celeba_val_pred.json")
+df_test = pd.read_json("json\\celeba_test_pred.json")
 
 # select X & Y for each dataset
 classes = [0, 1]
@@ -74,7 +74,7 @@ alphas_results_df = pd.DataFrame.from_dict(
     columns=["CNN Accuracy", "Valid Conformal Prediction Accuracy", "Valid CNN Accuracy",
              "Conformal Accuracy With {0,1}", "Null Percentage", "{0,1} Percentage"])
 print(alphas_results_df)
-alphas_results_df.to_json('celeba_alphas_results.json')
-df_results = pd.read_json("celeba_alphas_results.json", convert_axes=False)
+alphas_results_df.to_json('json\\celeba_alphas_results.json')
+df_results = pd.read_json("json\\celeba_alphas_results.json", convert_axes=False)
 
 cp_plots(df_results, "CelebA", "CNN")

@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 from egss.egss_mlp_functions import prepare_data_visualisation, kde2D_visualisation
 
 # Read training and testing data
-df_train = pd.read_json("EGSS_MLP_train_results.json")
-df_test = pd.read_json("EGSS_MLP_test_results.json")
+df_train = pd.read_json("json\\egss_train_results.json")
+df_test = pd.read_json("json\\egss_test_results.json")
 
 
 X_train, label_train, X_val, label_val, X_test, label_test, inertie = prepare_data_visualisation(df_train, df_test)

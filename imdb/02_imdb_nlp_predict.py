@@ -1,15 +1,21 @@
 # https://stackoverflow.com/questions/41577705/how-does-2d-kernel-density-estimation-in-python-sklearn-work
 # https://medium.com/swlh/aps-failure-at-scania-trucks-203975cdc2dd
-
 import pandas as pd
 from keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLROnPlateau
 from keras.preprocessing import sequence
 from sklearn.model_selection import train_test_split
 import pickle
 from imdb.imdb_nlp_functions import get_model
+import os, shutil
 
 
 if __name__ == "__main__":
+    output_path = "json"
+    if os.path.exists(output_path):
+        shutil.rmtree(output_path)
+
+    if not os.path.exists(output_path):
+        os.makedirs(output_path)
     # import data
     import numpy as np
     data = pd.read_csv('datasets\\IMDB\\IMDB Dataset.csv', encoding='latin-1')
@@ -71,7 +77,7 @@ if __name__ == "__main__":
         mlp_repr.append(repr[i])
 
     df = pd.DataFrame({"preds": mlp_preds, "repr": mlp_repr, "label": Y_test})
-    df.to_json("IMDb_NLP_test_results.json", orient='records')
+    df.to_json(output_path +"\\imdb_test_results.json", orient='records')
 
     pred_train = model.predict(sequences_matrix_train)
     pr, repr_train = repr_model.predict(sequences_matrix_train)
@@ -83,7 +89,7 @@ if __name__ == "__main__":
         mlp_repr.append(repr_train[i])
 
     df = pd.DataFrame({"preds": mlp_preds, "repr": mlp_repr, "label": Y_train})
-    df.to_json("IMDb_NLP_train_results.json", orient='records')
+    df.to_json(output_path +"\\imdb_train_results.json", orient='records')
 
     pred_val = model.predict(sequences_matrix_val)
     pr, repr_val = repr_model.predict(sequences_matrix_val)
@@ -95,18 +101,18 @@ if __name__ == "__main__":
         mlp_repr.append(repr_val[i])
 
     df = pd.DataFrame({"preds": mlp_preds, "repr": mlp_repr, "label": Y_val})
-    df.to_json("IMDb_NLP_val_results.json", orient='records')
+    df.to_json(output_path +"\\imdb_val_results.json", orient='records')
 
     import json
 
-    file = "IMDb_NLP_test_results.json"
+    file = output_path +"\\imdb_test_results.json"
     data = json.load(open(file, 'r'))
     json.dump(data, open(file, 'w'), indent=4)
 
-    file = "IMDb_NLP_train_results.json"
+    file = output_path +"\\imdb_train_results.json"
     data = json.load(open(file, 'r'))
     json.dump(data, open(file, 'w'), indent=4)
 
-    file = "IMDb_NLP_val_results.json"
+    file = output_path +"\\imdb_val_results.json"
     data = json.load(open(file, 'r'))
     json.dump(data, open(file, 'w'), indent=4)

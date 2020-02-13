@@ -2,6 +2,7 @@
 import numpy as np
 import pandas as pd
 from sklearn.neighbors import KernelDensity
+import os, shutil
 
 
 def kde2D(X_train, X_val, bandwidth, **kwargs):
@@ -33,14 +34,14 @@ def kde2D_pred(X, density_values):
     return preds
 
 
-df_train = pd.read_json("train_pred.json")
-df_val = pd.read_json("val_pred.json")
-df_test = pd.read_json("test_pred.json")
-df_clean = pd.read_json("clean_images_pred.json")
-df_noisy = pd.read_json("noisy_images_pred.json")
-df_internet = pd.read_json("internet_images_pred.json")
-df_outlier = pd.read_json("outlier_images_pred.json")
-df_masked = pd.read_json("masked_images_pred.json")
+df_train = pd.read_json("json\\celeba_train_pred.json")
+df_val = pd.read_json("json\\celeba_val_pred.json")
+df_test = pd.read_json("json\\celeba_test_pred.json")
+df_clean = pd.read_json("json\\celeba_clean_images_pred.json")
+df_noisy = pd.read_json("json\\celeba_noisy_images_pred.json")
+df_internet = pd.read_json("json\\celeba_internet_images_pred.json")
+df_outlier = pd.read_json("json\\celeba_outlier_images_pred.json")
+df_masked = pd.read_json("json\\celeba_masked_images_pred.json")
 
 classes = [0, 1]
 density_values = dict()
@@ -78,16 +79,22 @@ internet_X = np.array(df_internet["repr"].tolist())
 internet_pred = kde2D_pred(internet_X, density_values)
 
 df_clean["c_pred"] = clean_pred.values()
-df_clean.to_json('clean_cpred.json', orient='records')
+df_clean.to_json('json\\celeba_clean_cpred.json', orient='records')
 
 df_noisy["c_pred"] = noisy_pred.values()
-df_noisy.to_json('noisy_cpred.json', orient='records')
+df_noisy.to_json('json\\celeba_noisy_cpred.json', orient='records')
 
 df_masked["c_pred"] = masked_pred.values()
-df_masked.to_json('masked_cpred.json', orient='records')
+df_masked.to_json('json\\celeba_masked_cpred.json', orient='records')
 
 df_outlier["c_pred"] = outlier_pred.values()
-df_outlier.to_json('outlier_cpred.json', orient='records')
+df_outlier.to_json('json\\celeba_outlier_cpred.json', orient='records')
 
 df_internet["c_pred"] = internet_pred.values()
-df_internet.to_json('internet_cpred.json', orient='records')
+df_internet.to_json('json\\celeba_internet_cpred.json', orient='records')
+
+if os.path.exists("c_images"):
+    shutil.rmtree("c_images")
+
+if not os.path.exists("c_images"):
+    os.makedirs("c_images")

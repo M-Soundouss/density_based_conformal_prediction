@@ -193,7 +193,7 @@ def get_model(n_classes=1, lr=0.00001, max_len=200, max_words=10000):
     x = Dense(256, name="dense_1")(x)
     x = Activation('relu')(x)
     x = Dropout(0.5)(x)
-    x = Dense(64, name="dense_2")(x)
+    x = Dense(50, name="dense_2")(x)
     x_repr = Activation('tanh')(x)
     x = Dropout(0.1)(x_repr)
 

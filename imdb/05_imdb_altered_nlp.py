@@ -1,5 +1,3 @@
-import os
-import numpy as np
 import pandas as pd
 from keras.preprocessing import sequence
 from sklearn.model_selection import train_test_split
@@ -72,7 +70,7 @@ if __name__ == "__main__":
         mlp_repr.append(repr[i])
 
     df = pd.DataFrame({"data": X_test, "preds": mlp_preds, "repr": mlp_repr, "label": Y_test})
-    df.to_json("IMDb_NLP_clean_results.json", orient='records')
+    df.to_json("json\\imdb_clean_results.json", orient='records')
 
     pred = model.predict(sequences_matrix_noise)
     pr, repr = repr_model.predict(sequences_matrix_noise)
@@ -84,7 +82,7 @@ if __name__ == "__main__":
         mlp_repr.append(repr[i])
 
     df = pd.DataFrame({"data": X_noise, "preds": mlp_preds, "repr": mlp_repr, "label": Y_test})
-    df.to_json("IMDb_NLP_noisy_results.json", orient='records')
+    df.to_json("json\\imdb_noisy_results.json", orient='records')
 
     pred = model.predict(sequences_matrix_outlier)
     pr, repr = repr_model.predict(sequences_matrix_outlier)
@@ -96,4 +94,4 @@ if __name__ == "__main__":
         mlp_repr.append(repr[i])
 
     df = pd.DataFrame({"data": X_outlier, "preds": mlp_preds, "repr": mlp_repr, "label": Y_test})
-    df.to_json("IMDb_NLP_outlier_results.json", orient='records')
+    df.to_json("json\\imdb_outlier_results.json", orient='records')

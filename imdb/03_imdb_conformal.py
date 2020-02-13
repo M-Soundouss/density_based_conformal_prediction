@@ -3,14 +3,13 @@
 import numpy as np
 import pandas as pd
 from sklearn.metrics import accuracy_score
-from sklearn.model_selection import train_test_split
 from imdb.imdb_nlp_functions import cp_plots, calculate_accuracy, kde2D, kde2D_scores, kde2D_pred
 
 
 # Read training and testing data
-df_train = pd.read_json("IMDb_NLP_train_results.json")
-df_test = pd.read_json("IMDb_NLP_test_results.json")
-df_val = pd.read_json("IMDb_NLP_val_results.json")
+df_train = pd.read_json("json\\imdb_train_results.json")
+df_test = pd.read_json("json\\imdb_test_results.json")
+df_val = pd.read_json("json\\imdb_val_results.json")
 
 df_train["preds"] = df_train["preds"].apply(lambda x: 0 if x <= 0.5 else 1)
 df_test["preds"] = df_test["preds"].apply(lambda x: 0 if x <= 0.5 else 1)
@@ -80,7 +79,7 @@ alphas_results_df = pd.DataFrame.from_dict(
     columns=["CNN Accuracy", "Valid Conformal Prediction Accuracy", "Valid CNN Accuracy",
              "Conformal Accuracy With {0,1}", "Null Percentage", "{0,1} Percentage"])
 print(alphas_results_df)
-alphas_results_df.to_json('imdb_alphas_results.json')
-df_results = pd.read_json("imdb_alphas_results.json", convert_axes=False)
+alphas_results_df.to_json('json\\imdb_alphas_results.json')
+df_results = pd.read_json("json\\imdb_alphas_results.json", convert_axes=False)
 
 cp_plots(df_results, "IMDb", "GRU")

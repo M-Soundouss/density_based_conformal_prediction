@@ -6,9 +6,15 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from tqdm import tqdm
 from celeba.celeba_cnn_functions import read_and_resize, chunker, gen, get_model, create_path
+import os, shutil
 
 
 if __name__ == "__main__":
+    if os.path.exists("json"):
+        shutil.rmtree("json")
+
+    if not os.path.exists("json"):
+        os.makedirs("json")
 
     base_path = "datasets\\CELEBA\\img_align_celeba\\"
     df_path = "datasets\\CELEBA\\list_attr_celeba.csv"
@@ -40,7 +46,7 @@ if __name__ == "__main__":
     model.load_weights(file_path)
     repr_model.load_weights(file_path, by_name=True)
 
-    for df, out_name in zip([train, val, test], ["train_pred.json", "val_pred.json", "test_pred.json"]):
+    for df, out_name in zip([train, val, test], ["json\\celeba_train_pred.json", "json\\celeba_val_pred.json", "json\\celeba_test_pred.json"]):
         labels = []
         preds = []
         repr_list = []

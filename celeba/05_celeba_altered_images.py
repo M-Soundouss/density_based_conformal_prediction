@@ -9,6 +9,7 @@ input_path = "data/clean_images/"
 
 shutil.rmtree(input_path.replace("clean_images", "noisy_images"), ignore_errors=True)
 shutil.rmtree(input_path.replace("clean_images", "masked_images"), ignore_errors=True)
+shutil.rmtree(input_path.replace("clean_images", "outlier_images"), ignore_errors=True)
 
 os.makedirs(input_path.replace("clean_images", "noisy_images"), exist_ok=True)
 os.makedirs(input_path.replace("clean_images", "masked_images"), exist_ok=True)
@@ -38,7 +39,5 @@ for x in in_images:
 
 
     cv2.imwrite(x.replace("clean_images", "noisy_images"), img_g_noise)
-
     cv2.imwrite(x.replace("clean_images", "masked_images"), img_masked)
-
     cv2.imwrite(x.replace("clean_images", "outlier_images"), img_uniform_noise)

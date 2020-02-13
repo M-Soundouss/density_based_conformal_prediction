@@ -191,10 +191,9 @@ def get_model(n_classes=1, lr=0.00001):
     # Keras model with two hidden layer with 10 neurons each
     x = Dense(128, name="dense_1")(input_layer)
     x = LeakyReLU()(x)
-    x = Dense(64, name="dense_2")(x)
-    #x_repr = Activation('relu')(x)
+    x = Dense(50, name="dense_2")(x)
     x_repr = LeakyReLU()(x)
-    x = Dropout(0.1)(x_repr)
+    x = Dropout(0.2)(x_repr)
 
     if n_classes == 1:
         x = Dense(n_classes, activation="sigmoid", name='out')(x)

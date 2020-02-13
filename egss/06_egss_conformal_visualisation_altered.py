@@ -57,7 +57,7 @@ for i in classes:
     X_val_class = X_val[label_val == i, :]
     # alter next line command with X_clean/X_outliers/X_noisy and label_clean/label_outliers/label_noisy
     # (!!! keep X_noisy_class)
-    X_noisy_class = X_outliers[label_outliers == i, :]
+    X_noisy_class = X_noisy[label_noisy == i, :]
 
     feature_train_1 = X_train_class[:, 0]
     feature_train_2 = X_train_class[:, 1]
@@ -110,8 +110,8 @@ plt.ylim(-6, 6)
 plt.xlabel("Principal Component 1")
 plt.ylabel("Principal Component 2")
 # alter next line command with Original/Outlier/Noise in the title
-title = 'EGSS Outliers : ' + r'$\epsilon$' + ' = 0.1'
+title = 'EGSS Noise : ' + r'$\epsilon$' + ' = 0.1'
 plt.title(title)
 # alter next line command with clean/outlier/noise in the file name
-plt.savefig('egss_density_outlier_eng.eps', format='eps')
+plt.savefig('egss_density_noisy_eng.eps', format='eps')
 plt.close()

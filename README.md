@@ -1,6 +1,6 @@
 # Density-based Conformal Prediction
 
-Code for article : Deep conformal prediction for robust models
+Code for article : Deep conformal prediction for robust models : https://link.springer.com/chapter/10.1007/978-3-030-50146-4_39
 
 Environment : Python 3.6 with Keras, Tensorflow, ands libraries numpy, pandas, sklearn, matplotlib.
 
